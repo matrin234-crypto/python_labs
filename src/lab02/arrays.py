@@ -44,12 +44,11 @@ if __name__ == '__main__':
         [1.5, 2, 2.0, -3.1]
     ]
 
-    for i in min_max_tests:
-
-        try:
-            print(i, '=>', min_max(i))
-        except Exception as err:
-            print(i, '=>', f'Тип ошибки: {type(err)}, Комментарий: {err}')
+    # for i in min_max_tests:
+    #     try:
+    #         print(i, '=>', min_max(i))
+    #     except Exception as err:
+    #         print(i, '=>', f'Тип ошибки: {type(err)}, Комментарий: {err}')
 
     unique_sorted_tests = [
         [3, 1, 2, 1, 3],
@@ -58,11 +57,12 @@ if __name__ == '__main__':
         [1.0, 1, 2.5, 2.5, 0]
         ]
 
-    for i in unique_sorted_tests:
-        try:
-            print(i, '=>', unique_sorted(i))
-        except Exception as err:
-            print(i, '=>', f'Тип ошибки: {type(err)}, Комментарий: {err}')
+    # for i in unique_sorted_tests:
+    #     try:
+    #         print(i, '=>', unique_sorted(i))
+    #     except Exception as err:
+    #         print(i, '=>', f'Тип ошибки: {type(err)}, Комментарий: {err}')
+
     flatten_tests = [
         [[1, 2], [3, 4]],
         [[1, 2], (3, 4, 5)],
