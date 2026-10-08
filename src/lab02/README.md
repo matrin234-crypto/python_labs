@@ -21,4 +21,4 @@ def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
     return (x_min, x_max)
 ```
 ### Тесткейсы:
-![](images\lab02\arrays_min_max.png)
+![arrays_min_max](images\lab02\arrays_min_max.png)
