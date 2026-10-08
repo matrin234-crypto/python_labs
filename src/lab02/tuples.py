@@ -40,7 +40,8 @@ def format_record(rec: tuple[str, str, float]) -> str:
         raise ValueError('Некорректная группа. Номер группы состоит минимум из 1 символа.')
     if not gpa_check(rec[2]):
         raise ValueError('Некорректная GPA. Значение должно быть от 0 до 5.')
-
+    
+    #форматирование \/ \/ \/ \/
     fio_unwrapped = fio_unwrap(rec[0])
     target_fio = fio_unwrapped[0] + ' ' + '.'.join([fio_unwrapped[i][0] for i in range(1, len(fio_unwrapped))])+'.'
 
