@@ -52,7 +52,7 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
 ![text_freq_top_n](/images/lab03/text_freq_top_n.png)
 ### Assert'ы к заданию находятся здесь 
 
-[![Открыть код](https://shields.io)](./test.py)
+[Открыть код](./test.py)
 
 ## Задание B
 Пояснения находятся внутри кода.
