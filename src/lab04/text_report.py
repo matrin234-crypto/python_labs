@@ -4,6 +4,7 @@ from pathlib import Path
 
 # Подгружаем корень, чтобы импорты из src.* работали без ошибок
 sys.path.append(str(Path(__file__).resolve().parents[2]))
+
 from src.lib.text import normalize, tokenize, count_freq, top_n
 from src.lab04.io_txt_csv import read_text, write_csv
 
@@ -37,6 +38,7 @@ def main():
 
     input_paths = [Path(p) for p in args.inputs] if args.inputs else [Path("data/lab04/input.txt")]
 
+    # Обработка ошибки: файл не найден
     for p in input_paths:
         if not p.exists():
             print(f"Ошибка: Файл не найден: {p}", file=sys.stderr)
@@ -74,7 +76,7 @@ def main():
                 per_file_rows.append((p.name, word, count))
                 total_freq[word] = total_freq.get(word, 0) + count
 
-        # Сортировка: имя файла ↑, количество ↓, слово ↑
+        # Сортировка: имя файла /\, количество \/, слово /\
         per_file_rows.sort(key=lambda x: (x[0], -x[2], x[1]))
 
         # Общий сводный отчёт

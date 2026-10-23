@@ -68,7 +68,7 @@ def write_csv(rows: Iterable[Sequence], path: str | Path,
 
     ensure_parent_dir(p)
 
-    with p.open("w", newline="", encoding="utf-8") as f:
+    with p.open("w", newline="", encoding="utf-8") as f: 
         w = csv.writer(f, delimiter=",")
         if header is not None:
             w.writerow(header)
