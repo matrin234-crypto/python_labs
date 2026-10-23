@@ -46,7 +46,7 @@ def write_csv(rows: Iterable[Sequence], path: str | Path,
     p = Path(path)
     rows_list = list(rows)
     
-    # Краевой случай: данных нет и заголовка нет -> пустой файл
+    # Краевой случай: данных нет и заголовка нет => пустой файл
     if not rows_list and header is None:
         ensure_parent_dir(p)
         p.write_text("", encoding="utf-8")
