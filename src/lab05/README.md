@@ -32,7 +32,14 @@ import csv
 from pathlib import Path
 
 def json_to_csv(json_path: str, csv_path: str) -> None:
-    """Преобразует JSON-файл в CSV."""
+    """
+    Преобразует JSON-файл в CSV.
+    Используется встроенный модуль csv.
+    В проверках сделано так, что программа требует структуру непустого списка словарей и валидирует тип расширения.
+    
+    Открываем json, парсим данные, собираем все уникальные ключи со всех объектов и сортируем по алфавиту для заголовка.
+    Записываем строки через DictWriter, автоматически заполняя отсутствующие поля пустыми ячейками.
+    """
     json_p = Path(json_path)
     csv_p = Path(csv_path)
     
@@ -66,7 +73,14 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
             csv_writer.writerows(data)
         
 def csv_to_json(csv_path: str, json_path: str) -> None:
-    """Преобразует CSV в JSON (список словарей)."""
+    """
+    Преобразует CSV в JSON (список словарей).
+    Используется встроенный модуль json.
+    В проверках сделано так, что программа требует обязательное наличие хедера и хотя бы одной непустой строки.
+    
+    Открываем csv, читаем строки через DictReader в виде словарей, отфильтровывая пустые фантомные ряды.
+    Сериализуем полученный список словарей в json-файл с поддержкой кириллицы и отступами в 2 пробела.
+    """
     csv_p = Path(csv_path)
     json_p = Path(json_path)
     
@@ -93,33 +107,6 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
         
         with json_p.open('w', encoding='utf-8') as json_file:
             json.dump(data, json_file, ensure_ascii=False, indent=2)
-
-if __name__ == '__main__':
-    import sys
-    
-    # Если передали аргументы через консоль (длина sys.argv будет равна 3)
-    if len(sys.argv) == 3:
-        input_path = sys.argv[1]
-        output_path = sys.argv[2]
-        
-        print(f"Запуск ручной конвертации по аргументам из консоли.")
-        # Автоматически определяем направление по расширению входного файла
-        if input_path.endswith('.json'):
-            json_to_csv(input_path, output_path)
-            print(f"JSON => CSV выполнен: {input_path} => {output_path}")
-        elif input_path.endswith('.csv'):
-            csv_to_json(input_path, output_path)
-            print(f"CSV => JSON выполнен: {input_path} => {output_path}")
-        else:
-            print("Ошибка: Неподдерживаемый формат входного файла. Используйте .json или .csv")
-            
-    else:
-        # Если запустили просто так, отрабатывает дефолтный сценарий для ЛР
-        print("Аргументы не переданы. Запуск встроенного сценария.")
-        json_to_csv('data/samples/products.json', 'data/out/products_from_json.csv')
-        csv_to_json('data/samples/students.csv', 'data/out/students_from_csv.json')
-        print("Встроенный сценарий JSON ↔ CSV завершен.")
-
 ```
 ### Образец:
 ### 1. JSON => CSV
@@ -161,7 +148,14 @@ from openpyxl import Workbook
 from pathlib import Path
 
 def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
-    """Конвертирует CSV в XLSX с автоматическим расчетом ширины колонок."""
+    """
+    Конвертирует CSV в XLSX с автоматическим расчетом ширины колонок.
+    Используется дополнительная библиотека openpyxl.
+    В проверках сделано так, что программа требует наличие хедера, .csv расширения и как минимум 1 ряда с данными.
+    
+    Открываем csv, считываем только заполненные строки, переносим их на лист "Sheet1" через ws.append.
+    Итерируемся по колонкам через встроенные свойства библиотеки и меняем их размеры (максимальная длина + 2, но не менее 8).
+    """
     csv_p = Path(csv_path)
     
     if not csv_p.exists():
@@ -208,22 +202,6 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
         ws.column_dimensions[col_letter].width = max(max_len + 2, 8)
     
     wb.save(xlsx_path)
-
-if __name__ == '__main__':
-    import sys
-    
-    if len(sys.argv) == 3:
-        input_path = sys.argv[1]
-        output_path = sys.argv[2]
-        
-        print(f"Запуск ручной конвертации по аргументам из консоли.")
-        csv_to_xlsx(input_path, output_path)
-        print(f"CSV => XLSX выполнен: {input_path} => {output_path}")
-        
-    else:
-        print("Аргументы не переданы. Запуск встроенного сценария.")
-        csv_to_xlsx('data/samples/students.csv', 'data/out/students.xlsx')
-        print("Встроенный сценарий CSV => XLSX успешно завершен.")
 ```
 ### Образец CSV => XLSX:
 ### [students.csv](/data/samples/students.csv) => [students.xlsx](/data/out/students.xlsx)
