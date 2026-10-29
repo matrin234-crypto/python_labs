@@ -66,11 +66,9 @@ def main():
     people_xlsx = str(out_dir / "people.xlsx")
     
     try:
-        # Проверяем на cities.csv из ТЗ
         csv_to_xlsx(cities_csv, cities_xlsx)
         print(f"  - Успешно: {cities_csv} => {cities_xlsx}")
         
-        # Проверяем на people.csv из ТЗ
         csv_to_xlsx(csv_in, people_xlsx)
         print(f"  - Успешно: {csv_in} => {people_xlsx}")
         print("  - Проверка: Откройте файлы в Excel/LibreOffice для проверки ширины колонок.")
